@@ -1,0 +1,45 @@
+.completed {
+    color: red;
+}
+
+#newTodoInput {
+    margin-right: 10px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+td {
+    text-align: center;
+}
+
+.redInput {
+    border-color: red;
+}
+
+.jumbotron {
+    background-color: rgb(58,91,89) !important;
+    border-radius: 0 !important;
+    color: floralwhite;
+}
+
+.lead {
+    font-family: 'Oswald', sans-serif;
+}
+
+h1 {
+    font-family: 'Abril Fatface', cursive;
+}
+
+h2 {
+    color: rgb(52,58,64);
+    font-family: 'Parisienne', cursive;
+}
+
+body {
+    background-image: linear-gradient(to bottom right, rgb(187,213,210), rgb(115, 168, 168)) !important;
+    min-height: 100vh;
+}
+
+tbody {
+    background-color: rgb(240, 240, 240);
+}

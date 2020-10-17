@@ -26,15 +26,15 @@ function appendToDom(array){
     for (let i = 0; i < array.length; i++) {
         let el = '';
         if(array[i].completed_status === true){
-            el = 'Task Completed!';
+            el = `<p class="completed">Task Completed!</p>`;
         } else {
-            el = '<button class="complete">Complete Task</button>'
+            el = '<p><button class="complete btn btn-success">Complete Task</button></p>'
         }
         $('#listTable').append(`
             <tr data-id=${array[i].id}>
                 <td>${array[i].task}</td>
                 <td>${el}</td>
-                <td><button class="delete">Remove Todo</button></td>
+                <td><button class="delete btn btn-danger">Remove To-Do</button></td>
             </tr>
         `)
     }
@@ -42,20 +42,25 @@ function appendToDom(array){
 
 function addTodo(){
     console.log('addTodo clicked');
+    if($('#newTodoInput').val() === ''){
+        return alert('Input a task in the field!')
+    } else {
     
-    let newTodo = {
-        task: $('#newTodoInput').val()
-    }
+        let newTodo = {
+            task: $('#newTodoInput').val()
+        }
 
-    $.ajax({
-        method: 'POST',
-        url: '/tasks',
-        data: newTodo
-    }).then(function (response) {
-        $('#newTodoInput').val('');
-        console.log('Response:', response);
-        getTodos();
-    })
+        $.ajax({
+            method: 'POST',
+            url: '/tasks',
+            data: newTodo
+        }).then(function (response) {
+            $('#newTodoInput').val('');
+            console.log('Response:', response);
+            getTodos();
+        });
+
+    }
 }
 
 function deleteBtn(){
