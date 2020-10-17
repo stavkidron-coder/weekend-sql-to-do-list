@@ -24,38 +24,50 @@ function appendToDom(array){
     $('#listTable').empty();
     console.log('Array:', array);
     for (let i = 0; i < array.length; i++) {
-        let el = '';
         if(array[i].completed_status === true){
-            el = 'Task Completed!';
+            $('#listTable').append(`
+                <tr data-id=${array[i].id}>
+                    <td class="strikeThrough taskName completed">
+                        <span class="checkMark"><i class="fas fa-check checkMark"></i></span>
+                        ${array[i].task}
+                    </td>
+                    <td class="completed">Task Completed!</td>
+                    <td class="completed"><button class="delete btn btn-danger">Remove</button></td>
+                </tr>
+            `)            
         } else {
-            el = '<button class="complete">Complete Task</button>'
-        }
-        $('#listTable').append(`
+            $('#listTable').append(`
             <tr data-id=${array[i].id}>
-                <td>${array[i].task}</td>
-                <td>${el}</td>
-                <td><button class="delete">Remove Todo</button></td>
+                <td class="taskName">${array[i].task}</td>
+                <td><button class="complete btn btn-success">Complete Task</button></td>
+                <td><button class="delete btn btn-danger">Remove</button></td>
             </tr>
-        `)
+        `)  
+        }
     }
 }
 
 function addTodo(){
     console.log('addTodo clicked');
+    if($('#newTodoInput').val() === ''){
+        return alert('Input a task in the field!')
+    } else {
     
-    let newTodo = {
-        task: $('#newTodoInput').val()
-    }
+        let newTodo = {
+            task: $('#newTodoInput').val()
+        }
 
-    $.ajax({
-        method: 'POST',
-        url: '/tasks',
-        data: newTodo
-    }).then(function (response) {
-        $('#newTodoInput').val('');
-        console.log('Response:', response);
-        getTodos();
-    })
+        $.ajax({
+            method: 'POST',
+            url: '/tasks',
+            data: newTodo
+        }).then(function (response) {
+            $('#newTodoInput').val('');
+            console.log('Response:', response);
+            getTodos();
+        });
+
+    }
 }
 
 function deleteBtn(){
