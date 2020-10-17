@@ -4,6 +4,7 @@ $(document).ready(onReady);
 
 function onReady() {
     $('#submit').on('click', addTodo); 
+    $('#listTable').on('click', '.delete', deleteBtn);
     getTodos();
 }
 
@@ -18,7 +19,7 @@ function getTodos(){
         // Append to dom
         for (let i = 0; i < response.length; i++) {
             $('#listTable').append(`
-                <tr>
+                <tr data-id=${response[i].id}>
                     <td>${response[i].task}</td>
                     <td><button class="complete">Complete Todo</button></td>
                     <td><button class="delete">Remove Todo</button></td>
@@ -44,4 +45,19 @@ function addTodo(){
         console.log('Response:', response);
         getTodos();
     })
+}
+
+function deleteBtn(){
+    console.log('deleteBtn clicked');
+    let taskId = $(this).closest('tr').data('id');
+
+    $.ajax({
+        method: 'DELETE',
+        url: `/tasks/${taskId}`
+    }).then(function(response) {
+        console.log('Delete Btn response:', response);
+        getTodos();
+    }).catch(function(error){
+        console.log('ERROR in deleteBtn:', error);
+    });
 }

@@ -12,8 +12,6 @@ router.get('/', (req, res) => {
     });
 });
 
-
-
 router.post('/', (req, res) => {
     console.log('req.body:', req.body);
     
@@ -28,4 +26,16 @@ router.post('/', (req, res) => {
     });
 });
 
+router.delete('/:idParam', (req, res) => {
+    console.log('Helo from DELETE', req.params.idParam);
+    let queryText = `DELETE FROM "todos" WHERE "id" = '${req.params.idParam}'`
+
+    pool.query(queryText).then((result) => {
+        console.log('Successfully Deleted!', result);
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.log('Error in DELETE router:', error);
+        res.sendStatus(500);
+    });
+});
 module.exports = router;
