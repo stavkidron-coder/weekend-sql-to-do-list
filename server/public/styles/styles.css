@@ -58,3 +58,8 @@ tbody {
 button {
     font-family: 'Oswald', sans-serif !important;
 }
+
+.checkMark {
+    float: left;
+    padding-left: 10px;
+}

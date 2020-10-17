@@ -28,7 +28,7 @@ function appendToDom(array){
             $('#listTable').append(`
                 <tr data-id=${array[i].id}>
                     <td class="strikeThrough taskName completed">
-                        <i class="fas fa-check checkMark"></i>
+                        <span class="checkMark"><i class="fas fa-check checkMark"></i></span>
                         ${array[i].task}
                     </td>
                     <td class="completed">Task Completed!</td>
