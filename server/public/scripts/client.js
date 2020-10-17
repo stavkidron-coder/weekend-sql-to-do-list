@@ -24,19 +24,26 @@ function appendToDom(array){
     $('#listTable').empty();
     console.log('Array:', array);
     for (let i = 0; i < array.length; i++) {
-        let el = '';
         if(array[i].completed_status === true){
-            el = `<p class="completed">Task Completed!</p>`;
+            $('#listTable').append(`
+                <tr data-id=${array[i].id}>
+                    <td class="strikeThrough taskName completed">
+                        <i class="fas fa-check checkMark"></i>
+                        ${array[i].task}
+                    </td>
+                    <td class="completed">Task Completed!</td>
+                    <td class="completed"><button class="delete btn btn-danger">Remove To-Do</button></td>
+                </tr>
+            `)            
         } else {
-            el = '<p><button class="complete btn btn-success">Complete Task</button></p>'
-        }
-        $('#listTable').append(`
+            $('#listTable').append(`
             <tr data-id=${array[i].id}>
-                <td>${array[i].task}</td>
-                <td>${el}</td>
+                <td class="taskName">${array[i].task}</td>
+                <td><button class="complete btn btn-success">Complete Task</button></td>
                 <td><button class="delete btn btn-danger">Remove To-Do</button></td>
             </tr>
-        `)
+        `)  
+        }
     }
 }
 

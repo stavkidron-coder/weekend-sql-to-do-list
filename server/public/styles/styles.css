@@ -1,5 +1,8 @@
 .completed {
-    color: red;
+    background-color: rgba(189, 255, 197, 0.447);
+    font-size: large;
+    vertical-align: middle !important;
+    font-family: 'Oswald', sans-serif;
 }
 
 #newTodoInput {
@@ -8,12 +11,15 @@
     border-bottom-right-radius: 5px;
 }
 
-td {
+tr {
     text-align: center;
 }
 
-.redInput {
-    border-color: red;
+.taskName{
+    font-family: 'Handlee', cursive;
+    font-weight: bold;
+    font-size: large;
+    vertical-align: middle !important;
 }
 
 .jumbotron {
@@ -32,7 +38,8 @@ h1 {
 
 h2 {
     color: rgb(52,58,64);
-    font-family: 'Parisienne', cursive;
+    font-family: 'Handlee', cursive;
+
 }
 
 body {
@@ -42,4 +49,12 @@ body {
 
 tbody {
     background-color: rgb(240, 240, 240);
+}
+
+.strikeThrough {
+    text-decoration: line-through !important;
+}
+
+button {
+    font-family: 'Oswald', sans-serif !important;
 }
