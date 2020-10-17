@@ -5,28 +5,39 @@ $(document).ready(onReady);
 function onReady() {
     $('#submit').on('click', addTodo); 
     $('#listTable').on('click', '.delete', deleteBtn);
+    $('#listTable').on('click', '.complete', completeBtn)
     getTodos();
 }
 
 function getTodos(){
-    //empty table
-    $('#listTable').empty();
     $.ajax({
         method: 'GET',
         url: '/tasks'
     }).then(function(response) {
-        console.log('GET response:', response);
-        // Append to dom
-        for (let i = 0; i < response.length; i++) {
-            $('#listTable').append(`
-                <tr data-id=${response[i].id}>
-                    <td>${response[i].task}</td>
-                    <td><button class="complete">Complete Todo</button></td>
-                    <td><button class="delete">Remove Todo</button></td>
-                </tr>
-            `)
-        }
+        appendToDom(response);
+    }).catch(function(error){
+        console.log(error);    
     });
+}
+
+function appendToDom(array){
+    $('#listTable').empty();
+    console.log('Array:', array);
+    for (let i = 0; i < array.length; i++) {
+        let el = '';
+        if(array[i].completed_status === true){
+            el = 'Task Completed!';
+        } else {
+            el = '<button class="complete">Complete Task</button>'
+        }
+        $('#listTable').append(`
+            <tr data-id=${array[i].id}>
+                <td>${array[i].task}</td>
+                <td>${el}</td>
+                <td><button class="delete">Remove Todo</button></td>
+            </tr>
+        `)
+    }
 }
 
 function addTodo(){
@@ -61,3 +72,21 @@ function deleteBtn(){
         console.log('ERROR in deleteBtn:', error);
     });
 }
+
+function completeBtn(){
+    console.log('completed Btn clicked');
+    let completedId = $(this).closest('tr').data('id');
+    console.log('clicked', completedId);
+
+    $.ajax({
+        method: 'PUT',
+        url: `/tasks/completed/${completedId}`,
+        data: {completedStatus: true}
+    }).then(function(response){
+        console.log('ajax PUT response:', response);
+        getTodos();
+    }).catch(function(error){
+        console.log('ERROR in ajax PUT:', error);
+    });
+    
+} 
