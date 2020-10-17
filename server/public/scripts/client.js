@@ -32,7 +32,7 @@ function appendToDom(array){
                         ${array[i].task}
                     </td>
                     <td class="completed">Task Completed!</td>
-                    <td class="completed"><button class="delete btn btn-danger">Remove To-Do</button></td>
+                    <td class="completed"><button class="delete btn btn-danger">Remove</button></td>
                 </tr>
             `)            
         } else {
@@ -40,7 +40,7 @@ function appendToDom(array){
             <tr data-id=${array[i].id}>
                 <td class="taskName">${array[i].task}</td>
                 <td><button class="complete btn btn-success">Complete Task</button></td>
-                <td><button class="delete btn btn-danger">Remove To-Do</button></td>
+                <td><button class="delete btn btn-danger">Remove</button></td>
             </tr>
         `)  
         }
